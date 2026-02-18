@@ -1,80 +1,103 @@
 // ==UserScript==
 // @name         AeroGPT
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.2
 // @match        https://chatgpt.com/*
-// @grant        none
+// @grant        GM_info
 // ==/UserScript==
 
 
 (function() {
     'use strict';
 
-    // Blur targets
+    // Elements to be BLURRED
     const blurTargets = [
         '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/form/div[2]/div',
         '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[1]/div/button',
         '//*[@id="page-header"]',
-        '/html/body/div[5]/div/div/div/div/div', // settings menu
-        '/html/body/div[6]', // key shortcuts
-        '//*[@id="radix-_r_g_"]', // header options menu
-        '/html/body/div[2]/div[1]/div/div[1]/div/div[2]/nav/div[9]', //profile
-        '//*[@id="radix-_r_c_"]', //profile click menu
-        '//*[@id="radix-_r_11u_"]', //profile click help menu
-        '//*[@id="radix-_r_i_"]', //attatchments menu
-        '//*[@id="radix-_r_nm_"]', //attatchments more menu
-        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/div' //"You‘re using a less powerful model..." blurred in case it shows up somehow
+        '/html/body/div[5]/div/div/div/div/div',
+        '/html/body/div[6]',
+        '//*[@id="radix-_r_g_"]',
+        '/html/body/div[2]/div[1]/div/div[1]/div/div[2]/nav/div[9]',
+        '//*[@id="radix-_r_c_"]',
+        '//*[@id="radix-_r_11u_"]',
+        '//*[@id="radix-_r_i_"]',
+        '//*[@id="radix-_r_nm_"]',
+        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/div',
+        '//*[@id="thread-bottom"]/div/div/div[2]/form/div[2]/div',
+        '//*[@id="stage-slideover-sidebar"]/div/div[2]/nav/aside'
     ];
 
-    // Delete targets
+    // Elements to be INVISIBLE
+    const opacityTargets = [
+       // '//*[@id="stage-slideover-sidebar"]/div/div[2]/nav/div[8]/div'
+    ];
+
+    // Elements to be DELETED
     const deleteXPathTargets = [
         '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[3]/div/div/div',
-        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/div' //"You‘re using a less powerful model..."
+        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/div',
+        '//*[@id="stage-slideover-sidebar"]/div/div[2]/nav/aside/div'
     ];
 
     const blurAlpha = 0.1;
     const blurPx = 10;
 
     function applyStyles() {
-        // Blur targets
+        // Blur
         blurTargets.forEach(path => {
-            const el = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            const el = document.evaluate(path, document, null, 9, null).singleNodeValue;
             if (el && !el.dataset.blurred) {
                 el.style.backgroundColor = `rgba(0,0,0,${blurAlpha})`;
                 el.style.backdropFilter = `blur(${blurPx}px)`;
-                el.style.WebkitBackdropFilter = `blur(${blurPx}px)`; // Safari
+                el.style.WebkitBackdropFilter = `blur(${blurPx}px)`;
                 el.dataset.blurred = 'true';
-                console.log('Blur applied to element:', el);
             }
         });
 
-        // Delete targets
-        deleteXPathTargets.forEach(path => {
-            const el = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-            if (el) {
-                el.remove();
-                console.log('Deleted element:', el);
+        // Invisible
+        opacityTargets.forEach(path => {
+            const el = document.evaluate(path, document, null, 9, null).singleNodeValue;
+            if (el && !el.dataset.hidden) {
+                el.style.opacity = '0';
+                el.style.pointerEvents = 'none';
+                el.setAttribute('aria-hidden', 'true');
+                el.dataset.hidden = 'true';
             }
         });
-        // other shit
+
+        // Delete
+        deleteXPathTargets.forEach(path => {
+            const el = document.evaluate(path, document, null, 9, null).singleNodeValue;
+            if (el) {
+                el.remove();
+            }
+        });
+
+        // Bottom bar tweaks
         const bottomBar = document.querySelector('.sticky.bottom-0.z-30');
         if (bottomBar) {
-            // Make it extend more to the right
-            //bottomBar.style.width = 'calc(100% + 30px)'; // add 30px extra width
-            bottomBar.style.marginRight = '17px'; // shift it right so it doesn't overflow the container
+            bottomBar.style.marginRight = '7px';
             bottomBar.style.marginLeft = '20px';
             bottomBar.style.bottom = '15px';
             bottomBar.style.borderRadius = '8px';
-            console.log('Bottom bar widened to the right!');
         }
 
-        // Dark theme adjustments
+        const newChat = document.evaluate(
+            '//*[@id="stage-slideover-sidebar"]/div/div[2]/nav/aside',
+            document, null, 9, null
+        ).singleNodeValue;
+
+        if (newChat) {
+            newChat.style.borderRadius = '20px';
+        }
+
+        // Theme vars
         document.documentElement.style.setProperty('--bg-primary', 'rgba(0,0,0,0)');
         document.documentElement.style.setProperty('--main-surface-tertiary', 'rgba(0,0,0,0.2)');
         document.documentElement.style.setProperty('--message-surface', 'rgba(0,0,0,0.2)');
     }
 
-    // Button modification
     const buttonSelector = '.btn.border-token-interactive-border-secondary-default.bg-token-bg-primary';
 
     function updateButton() {
@@ -85,28 +108,8 @@
             btn.disabled = true;
             btn.style.pointerEvents = 'none';
             btn.dataset.modified = 'true';
-            console.log('Button text updated and disabled:', btn);
         }
     }
-    // Initial runs
-    applyStyles();
-    updateButton();
-
-    // Observe dynamic DOM changes
-    const observer = new MutationObserver(() => {
-        applyStyles();
-        updateButton();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-})();
-
-
-// ==========================
-// Header reposition script (completely separate)
-// ==========================
-(function() {
-    'use strict';
 
     function repositionHeader() {
         const header = document.getElementById('page-header');
@@ -117,12 +120,31 @@
         header.style.borderRadius = '12px';
         header.style.width = 'calc(100% - 30px)';
         header.style.top = '10px';
-
-        console.log('Header repositioned');
     }
-
-    // Delay to wait for page JS
     window.addEventListener('load', () => {
-        setTimeout(repositionHeader, 1000);
+        setTimeout(delayedExecution, 1000);
     });
+
+    //======================
+    // EXCECUTION
+    //======================
+
+    applyStyles();
+    updateButton();
+
+    const observer = new MutationObserver(() => {
+        applyStyles();
+        updateButton();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    //======================
+    // DELAYED EXCECUTION
+    //======================
+    function delayedExecution() {
+        repositionHeader();
+        const weirdLine = document.querySelector('.align-end.pointer-events-none.sticky.z-40.flex.shrink-0.flex-col.justify-end'); //weird line in the bottom left
+        weirdLine.style.opacity = '0';
+        // '//*[@id="stage-slideover-sidebar"]/div/div[2]/nav/div[8]'
+    }
 })();
