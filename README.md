@@ -27,25 +27,25 @@ Chatgpt uses React so I can't do that.
 
 To add an element to the blur targets list, add it's xpath to the array blurTargets. here's what it looks like by default:
 
-    ```
-    const blurTargets = [
-        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/form/div[2]/div',
-        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[1]/div/button',
-        '//*[@id="page-header"]',
-        '/html/body/div[5]/div/div/div/div/div',
-        '/html/body/div[6]',
-        '//*[@id="radix-_r_g_"]',
-        '/html/body/div[2]/div[1]/div/div[1]/div/div[2]/nav/div[9]',
-        '//*[@id="radix-_r_c_"]',
-        '//*[@id="radix-_r_11u_"]',
-        '//*[@id="radix-_r_i_"]',
-        '//*[@id="radix-_r_nm_"]',
-        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/div',
-        '//*[@id="thread-bottom"]/div/div/div[2]/form/div[2]/div',
-        '//*[@id="stage-slideover-sidebar"]/div/div[2]/nav/aside'
-        '//anything/else/you/want'
-    ];
-    ```
+```js
+const blurTargets = [
+    '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/form/div[2]/div',
+    '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[1]/div/button',
+    '//*[@id="page-header"]',
+    '/html/body/div[5]/div/div/div/div/div',
+    '/html/body/div[6]',
+    '//*[@id="radix-_r_g_"]',
+    '/html/body/div[2]/div[1]/div/div[1]/div/div[2]/nav/div[9]',
+    '//*[@id="radix-_r_c_"]',
+    '//*[@id="radix-_r_11u_"]',
+    '//*[@id="radix-_r_i_"]',
+    '//*[@id="radix-_r_nm_"]',
+    '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/div',
+    '//*[@id="thread-bottom"]/div/div/div[2]/form/div[2]/div',
+    '//*[@id="stage-slideover-sidebar"]/div/div[2]/nav/aside'
+    '//anything/else/you/want'
+];
+```
 
 You can get an element xpath by right clicking the element (in devtools) > copy xpath. Full xpath is not required.
 
