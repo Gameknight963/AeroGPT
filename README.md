@@ -55,11 +55,12 @@ Implement it yourself if its so important. I haven't touched the code for like a
 
 Also I don't know anything about web development so that might've been a factor lol
 
-For some reason the blur doesn't work properly on Firefox on windows 11 specifically. Not sure why. Maybe my win11 install is just cursed, feel free to try it yourself. Works fine on my windows 10 though
-
-looks like this on firefox windows 11:
+### don't use browser.tabs.allow_transparent_browser
+looks like this with ``browser.tabs.allow_transparent_browser`` = true
 
 <img width="326" height="53" alt="image" src="https://github.com/user-attachments/assets/2a0b572d-4168-4807-a966-cf3000670b32" />
+
+so just dont turn that on
 
 ## Note:
 
