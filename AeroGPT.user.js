@@ -12,13 +12,13 @@
 
     // Elements to be BLURRED
     const blurTargets = [
-        '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[2]/div/div/div[2]/form/div[2]/div',
+        '/html/body/div[2]/div/div[1]/div/div/div/main/div/div/div[2]/div[2]/div/div/div/div[2]/form/div[2]/div', // search bar
         '/html/body/div[2]/div[1]/div/div[2]/div/main/div/div/div[2]/div[1]/div/button',
         '//*[@id="page-header"]',
         '/html/body/div[5]/div/div/div/div/div',
         '/html/body/div[6]',
         '//*[@id="radix-_r_g_"]',
-        '/html/body/div[2]/div[1]/div/div[1]/div/div[2]/nav/div[9]',
+        '/html/body/div[2]/div/div[1]/div/div[1]/div/div[2]/nav/div[8]', // profile bottom left
         '//*[@id="radix-_r_c_"]',
         '//*[@id="radix-_r_11u_"]',
         '//*[@id="radix-_r_i_"]',
@@ -77,8 +77,8 @@
         // Bottom bar tweaks
         const bottomBar = document.querySelector('.sticky.bottom-0.z-30');
         if (bottomBar) {
-            bottomBar.style.marginRight = '7px';
-            bottomBar.style.marginLeft = '20px';
+            bottomBar.style.marginRight = '15px';
+            bottomBar.style.marginLeft = '15px';
             bottomBar.style.bottom = '15px';
             bottomBar.style.borderRadius = '8px';
         }
@@ -116,7 +116,7 @@
         if (!header) return;
 
         header.style.position = 'sticky';
-        header.style.marginLeft = '4px';
+        header.style.marginLeft = '10px';
         header.style.borderRadius = '12px';
         header.style.width = 'calc(100% - 30px)';
         header.style.top = '10px';
