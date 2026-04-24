@@ -1,0 +1,88 @@
+/* ==UserStyle==
+@name         AeroGPT
+@namespace    aerogpt
+@version      3.0.0
+@description  Add cool aero effects to chatgpt cause why not
+==/UserStyle== */
+@-moz-document domain("chatgpt.com") {
+
+    :root {
+        --bg-primary: rgba(0, 0, 0, 0);
+        --main-surface-tertiary: rgba(0, 0, 0, 0.2);
+        --message-surface: rgba(0, 0, 0, 0.2);
+        --content-fade-bg: rgba(0, 0, 0, 0);
+        --blur-radius: 4px;
+
+        --aero-image: url(https://i.imgur.com/yHB4v9v.png);
+    }
+
+    /* Claim offer */
+    button[aria-label="Claim offer"] {
+        display: none
+    }
+
+    [data-testid="accounts-profile-button"] span.inline-flex > span {
+        font-size: 0;
+    }
+
+    [data-testid="accounts-profile-button"] span:has(> span)::after {
+        content: "AeroGPT v3.0,0";
+        transform: translateX(-5px);
+    }
+
+    #page-header {
+        background: rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(var(--blur-radius));
+        top: 10px;
+        margin-left: 4px;
+        width: calc(100% - 30px);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    div[data-composer-surface="true"],
+    div[role="menu"][data-radix-menu-content],
+    div[role="dialog"],
+    div.sticky.top-0.z-30,
+    div.sticky.bottom-0.z-30 {
+        background: transparent;
+        backdrop-filter: blur(var(--blur-radius));
+    }
+
+    /* new chat button */
+    .pt-\(--sidebar-section-first-margin-top\) {
+        position: relative;
+        transform: translateY(-50px);
+    }
+
+    /* ::before aero reflection */
+    div[data-composer-surface="true"]::before,
+    div[role="menu"][data-radix-menu-content]::before,
+    div[role="dialog"]::before,
+    div.sticky.top-0.z-30::before,
+    div.sticky.bottom-0.z-30::before,
+    #page-header::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: var(--aero-image);
+        opacity: 0.25;
+    }
+
+    /* Hidden elements */
+    .border-token-border-heavy,
+    div[class*="mask-image"] {
+        visibility: hidden;
+    }
+
+    /* Bottom left profile thing */
+    div.sticky.bottom-0.z-30 {
+        background: transparent;
+        backdrop-filter: blur(var(--blur-radius));
+        border-radius: 10px;
+        margin-top: 8px;
+        margin-right: 12px;
+        margin-left: 12px;
+        transform: translateY(-10px);
+    }
+}
