@@ -4,7 +4,7 @@ its chatgpt but with aero
 
 ## Installation
 
-wip
+On UserSyles.world: https://userstyles.world/style/27736
 
 ## Screenshots
 
