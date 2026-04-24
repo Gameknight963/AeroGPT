@@ -26,7 +26,7 @@
     }
 
     [data-testid="accounts-profile-button"] span:has(> span)::after {
-        content: "AeroGPT v3.0,0";
+        content: "AeroGPT v3.0.0";
         transform: translateX(-5px);
     }
 
