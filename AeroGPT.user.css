@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         AeroGPT
 @namespace    aerogpt
-@version      3.1.1
+@version      3.1.2
 @description  Add cool aero effects to chatgpt cause why not
 @preprocessor uso
 @var          range  reflection-opacity  "Reflection Opacity"  [0.4, 0, 1, 0.05]
@@ -98,8 +98,11 @@
 
     /* Hidden elements */
     .border-token-border-heavy,
-    div[class*="mask-image"] {
-        visibility: hidden;
+    div[class*="mask-image"],
+    button[aria-label="Upgrade"],
+    button[aria-label="Download apps"]
+    {
+        display: none
     }
 
     /* Bottom left profile thing */
