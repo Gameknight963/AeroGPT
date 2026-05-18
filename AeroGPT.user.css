@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         AeroGPT
 @namespace    aerogpt
-@version      3.1.2
+@version      3.1.3
 @description  Add cool aero effects to chatgpt cause why not
 @preprocessor uso
 @var          range  reflection-opacity  "Reflection Opacity"  [0.4, 0, 1, 0.05]
@@ -30,7 +30,7 @@
     }
 
     [data-testid="accounts-profile-button"] span:has(> span)::after {
-        content: "AeroGPT v3.1.0";
+        content: "AeroGPT v3.1.3";
         transform: translateX(-4px);
     }
 
