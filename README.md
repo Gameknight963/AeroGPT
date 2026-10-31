@@ -10,7 +10,7 @@ or you can click this banner
 
 [![Install directly with Stylus](https://img.shields.io/badge/Install%20directly%20with-Stylus-00adad.svg)](https://github.com/Gameknight963/AeroGPT/raw/refs/heads/main/AeroGPT.user.css)
 
-## Screenshots
+## Screenshots (outdated but wtv)
 
 <img width="772" height="89" alt="image" src="https://github.com/user-attachments/assets/fc548f9c-335d-4999-9f53-4969d9881213" />
 
