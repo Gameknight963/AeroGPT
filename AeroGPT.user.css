@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         AeroGPT
 @namespace    aerogpt
-@version      3.1.2
+@version      4.0.0
 @description  Add cool aero effects to chatgpt cause why not
 @preprocessor uso
 @var          range  reflection-opacity  "Reflection Opacity"  [0.4, 0, 1, 0.05]
@@ -20,72 +20,87 @@
         --aero-image: url(/*[[aero-image]]*/);
     }
 
-    /* Claim offer */
-    button[aria-label="Claim offer"] {
-        display: none
-    }
-
-    [data-testid="accounts-profile-button"] span.inline-flex > span {
-        font-size: 0;
-    }
-
-    [data-testid="accounts-profile-button"] span:has(> span)::after {
-        content: "AeroGPT v3.1.0";
-        transform: translateX(-4px);
-    }
-
-    #page-header {
-        background: rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(var(--blur-radius));
-        top: 10px;
-        margin-left: 4px;
-        width: calc(100% - 30px);
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    div[data-composer-surface="true"],
+    
+     /* Chat message typing box */
+    div[class^="ComposerLayoutRoot"],
+    div[class^="ComposerLayoutBody"],
+    
+     /* menus */
     div[role="menu"],
+    
+    /* modals */
+    .codex-dialog,
     div[role="dialog"],
-    div[role="tabpanel"],
-    div[role="listbox"],
-    div.popover,
-    #sidebar-header,
-    a[data-testid="create-new-chat-button"]
+    
+    /* plugin suggestion menu */
+    .composer-home-top-menu,
+    div[class*="suggestionMenu-"],
+    
+    /* jump to bottom button */
+    button.group\/scroll-to-bottom,
+    
+    /* Tooltips */
+    div[role="tooltip"],
+    
+    /* cool top bar blur */
+    .group\/titlebar
     {
         background: transparent;
         backdrop-filter: blur(var(--blur-radius));
     }
     
-    div[class*="bg-token-bg-tooltip"],
-    button[class*="group-data-stream-active/scroll-root"],
-    div.popover
+    /* Think button */
+    div[data-composer-trailing-controls="true"],
+    
+    /* Some of these inputs have a weird background */
+    input[cmdk-input],
+    input[id="settings-search"]
+    {
+        background: transparent !important;
+    }
+    
+    /* Black thing behind message bar */
+    div[class^="background-"][class*="surface-"]
+    {
+        display: none
+    }
+        
+    /* top bar buttons */
+    div[class*="browser:bg-surface"]
+    {
+        background: transparent;
+    }
+    
+    /* less obnoxiously colored codeblocks */
+    div[data-code-block="true"],
+    div[class*="StickyActionBar-"]
+    {
+        background: rgb(17, 17, 17)
+    }
+    
+    /* claim free offer gift button 
+    Nightmare to target, probably intentionally */
+    button[class*="border-button-outline"][class*="bg-surface-card"]
+    {
+        display: none
+    }
+    
+    /* These things are too small for reflections to be noticable
+    so give them a flat color instead
+    */
+    button.group\/scroll-to-bottom,
+    div[role="tooltip"]
     {
         background: rgba(0,0,0,var(--reflection-opacity));
         backdrop-filter: blur(var(--blur-radius));
     }
     
-    div[role="tablist"]{
-        background: transparent;
-    }
-    
-/*     #sidebar-header{
-        position: absolute;
-        width: 230px;
-        border-radius: 10px;
-    } */
-    
-/*     nav[aria-label="Chat history"][data-scrolled-from-top]{
-            transform: translateY(30px);
-            height: calc(100% - 30px);
-    } */
-
-    /* ::before aero reflection */
-    div[data-composer-surface="true"]::before,
+    /* Reflections */
+    [class^="ComposerLayoutRoot"]::before,
     div[role="menu"]::before,
-    div[role="dialog"]::before,
-    #page-header::before,
-    div[class*="--sidebar-width"][class*="sidebar-surface-primary"]::before
+    .codex-dialog::before,
+    div[class*="suggestionMenu-"]::before,
+    .group\/titlebar::before
     {
         pointer-events: none;
         content: "";
@@ -94,28 +109,5 @@
         inset: 0;
         background-image: var(--aero-image);
         border-radius: inherit;
-    }
-
-    /* Hidden elements */
-    .border-token-border-heavy,
-    div[class*="mask-image"],
-    button[aria-label="Upgrade"],
-    button[aria-label="Download apps"]
-    {
-        display: none
-    }
-
-    /* Bottom left profile thing */
-    div[class*="--sidebar-width"][class*="sidebar-surface-primary"] {
-        background: transparent;
-        backdrop-filter: blur(var(--blur-radius));
-        border-radius: 10px;
-        width: 230px;
-        margin-top: 8px;
-        margin-right: 12px;
-        margin-left: 12px;
-        position: fixed;
-        bottom: 12px;
-        left: 0px;
     }
 }
