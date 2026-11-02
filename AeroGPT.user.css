@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         AeroGPT
 @namespace    aerogpt
-@version      4.0.0
+@version      4.0.1
 @description  Add cool aero effects to chatgpt cause why not
 @preprocessor uso
 @var          range  reflection-opacity  "Reflection Opacity"  [0.4, 0, 1, 0.05]
@@ -54,7 +54,17 @@
     
     /* Some of these inputs have a weird background */
     input[cmdk-input],
-    input[id="settings-search"]
+    input[id="settings-search"],
+    
+    /* seperators between items in Keyboard Shortcuts */
+    
+    h3.sticky.top-0.z-10,
+    
+    /* bottom thing in Keyboard Shortcuts */
+    div[class*="justify-end"][class*="border-t"],
+    
+    /* top bar buttons */
+    div[class*="browser:bg-surface"]
     {
         background: transparent !important;
     }
@@ -63,12 +73,6 @@
     div[class^="background-"][class*="surface-"]
     {
         display: none
-    }
-        
-    /* top bar buttons */
-    div[class*="browser:bg-surface"]
-    {
-        background: transparent;
     }
     
     /* less obnoxiously colored codeblocks */
