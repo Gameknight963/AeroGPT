@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name         AeroGPT
 @namespace    aerogpt
-@version      4.0.1
+@version      4.0.2
 @description  Add cool aero effects to chatgpt cause why not
 @preprocessor uso
 @var          range  reflection-opacity  "Reflection Opacity"  [0.4, 0, 1, 0.05]
@@ -40,10 +40,13 @@
     button.group\/scroll-to-bottom,
     
     /* Tooltips */
-    div[role="tooltip"],
+    div[role="tooltip"]
     
-    /* cool top bar blur */
+    /*
+    cool top bar blur
+    actually nvm its annoying
     .group\/titlebar
+    */
     {
         background: transparent;
         backdrop-filter: blur(var(--blur-radius));
